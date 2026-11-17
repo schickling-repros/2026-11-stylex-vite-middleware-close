@@ -1,5 +1,7 @@
 # StyleX Vite middleware-mode shutdown
 
+Standalone reproduction source: https://github.com/schickling-repros/2026-11-stylex-vite-middleware-close/tree/schickling-assistant/2026-11-17-repro-source
+
 Minimal reproduction of the polling timer in `@stylexjs/unplugin` surviving Vite's middleware-mode `server.close()`.
 
 ## Reproduction
@@ -35,6 +37,8 @@ The parent deadline prevents an indefinite hang; the child has no forced exit, a
 - `@stylexjs/stylex`: 0.19.0
 - Vite: 8.3.8
 - pnpm: 12.17.0
+
+The standalone reproduction was exercised on macOS arm64: `server.close()` resolved, but the child remained alive until the parent's two-second post-close deadline terminated it. The runner returned status 1. The installed dependency closure was reused; a fresh install was not exercised.
 
 ## Cause and existing report
 
