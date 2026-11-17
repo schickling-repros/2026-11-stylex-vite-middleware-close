@@ -37,6 +37,7 @@ The parent deadline prevents an indefinite hang; the child has no forced exit, a
 - `@stylexjs/stylex`: 0.19.0
 - Vite: 8.3.8
 - pnpm: 12.17.0
+- Exercised Node.js runtime: 24.20.0 (macOS arm64)
 
 The standalone reproduction was exercised on macOS arm64: `server.close()` resolved, but the child remained alive until the parent's two-second post-close deadline terminated it. The runner returned status 1. The installed dependency closure was reused; a fresh install was not exercised.
 
